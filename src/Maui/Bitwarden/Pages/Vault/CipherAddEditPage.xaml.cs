@@ -267,7 +267,7 @@ namespace Bit.App.Pages
             {
                 var page = new ScanPage(key =>
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    Dispatcher.Dispatch(async () =>
                     {
                         await Navigation.PopModalAsync();
                         await _vm.UpdateTotpKeyAsync(key);

@@ -83,7 +83,7 @@ namespace Bit.App.Controls
         {
             await _stateService.RefreshAccountViewsAsync(AllowAddAccountRow);
 
-            Device.BeginInvokeOnMainThread(() => TriggerPropertyChanged(nameof(AccountViews)));
+            App.Current.Dispatcher.Dispatch(() => TriggerPropertyChanged(nameof(AccountViews)));
         }
     }
 }

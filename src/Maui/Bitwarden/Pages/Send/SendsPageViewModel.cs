@@ -102,7 +102,7 @@ namespace Bit.App.Pages
                 {
                     sends = new List<SendView>();
                 }
-                Device.BeginInvokeOnMainThread(() =>
+                App.Current.Dispatcher.Dispatch(() =>
                 {
                     Sends.ResetWithRange(sends);
                     ShowNoData = searchable && Sends.Count == 0;

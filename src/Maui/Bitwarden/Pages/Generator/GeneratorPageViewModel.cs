@@ -843,7 +843,7 @@ namespace Bit.App.Pages
                 }
             }
 
-            await Device.InvokeOnMainThreadAsync(() => Page.DisplayAlert(AppResources.AnErrorHasOccurred, message, AppResources.Ok));
+            await App.Current.Dispatcher.DispatchAsync(() => Page.DisplayAlert(AppResources.AnErrorHasOccurred, message, AppResources.Ok));
         }
 
         private string GetUsernameTypeLabelDescription(UsernameType value)

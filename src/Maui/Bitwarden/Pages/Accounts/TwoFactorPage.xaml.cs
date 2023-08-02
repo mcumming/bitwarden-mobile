@@ -33,11 +33,11 @@ namespace Bit.App.Pages
             _vm = BindingContext as TwoFactorPageViewModel;
             _vm.Page = this;
             _vm.StartSetPasswordAction = () =>
-                Device.BeginInvokeOnMainThread(async () => await StartSetPasswordAsync());
+                Dispatcher.Dispatch(async () => await StartSetPasswordAsync());
             _vm.TwoFactorAuthSuccessAction = () =>
-                Device.BeginInvokeOnMainThread(async () => await TwoFactorAuthSuccessAsync());
+                Dispatcher.Dispatch(async () => await TwoFactorAuthSuccessAsync());
             _vm.UpdateTempPasswordAction =
-                () => Device.BeginInvokeOnMainThread(async () => await UpdateTempPasswordAsync());
+                () => Dispatcher.Dispatch(async () => await UpdateTempPasswordAsync());
             _vm.CloseAction = async () => await Navigation.PopModalAsync();
             DuoWebView = _duoWebView;
             // TODO Xamarin.Forms.Device.RuntimePlatform is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
@@ -69,7 +69,7 @@ namespace Bit.App.Pages
                     if (_vm.YubikeyMethod && !string.IsNullOrWhiteSpace(token) &&
                         token.Length == 44 && !token.Contains(" "))
                     {
-                        Device.BeginInvokeOnMainThread(async () =>
+                        Dispatcher.Dispatch(async () =>
                         {
                             _vm.Token = token;
                             await _vm.SubmitAsync();

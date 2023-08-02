@@ -648,7 +648,7 @@ namespace Bit.App.Pages
 
         internal void TriggerSendTextPropertyChanged()
         {
-            Device.BeginInvokeOnMainThread(() => TriggerPropertyChanged(nameof(Send)));
+            App.Current.Dispatcher.Dispatch(() => TriggerPropertyChanged(nameof(Send)));
         }
     }
 }

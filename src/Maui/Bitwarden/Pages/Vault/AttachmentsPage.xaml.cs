@@ -33,7 +33,7 @@ namespace Bit.App.Pages
             {
                 if (message.Command == "selectFileResult")
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    Dispatcher.Dispatch(() =>
                     {
                         var data = message.Data as Tuple<byte[], string>;
                         _vm.FileData = data.Item1;

@@ -111,7 +111,7 @@ namespace Bit.App.Pages
                     while (!autofocusCts.IsCancellationRequested)
                     {
                         await Task.Delay(TimeSpan.FromSeconds(2), autofocusCts.Token);
-                        await Device.InvokeOnMainThreadAsync(() =>
+                        await Dispatcher.DispatchAsync(() =>
                         {
                             if (!autofocusCts.IsCancellationRequested)
                             {

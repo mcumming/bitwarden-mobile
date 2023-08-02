@@ -324,7 +324,7 @@ namespace Bit.App.Pages
             }
             if (oldTimeout != newTimeout)
             {
-                await Device.InvokeOnMainThreadAsync(BuildList);
+                await App.Current.Dispatcher.DispatchAsync(BuildList);
             }
         }
 
@@ -690,7 +690,7 @@ namespace Bit.App.Pages
                 new SettingsPageListItem
                 {
                     Name = AppResources.ImportItems,
-                    ExecuteAsync = () => Device.InvokeOnMainThreadAsync(() => Import())
+                    ExecuteAsync = () => App.Current.Dispatcher.DispatchAsync(() => Import())
                 },
                 new SettingsPageListItem
                 {
@@ -708,7 +708,7 @@ namespace Bit.App.Pages
                 toolsItems.Add(new SettingsPageListItem
                 {
                     Name = AppResources.WebVault,
-                    ExecuteAsync = () => Device.InvokeOnMainThreadAsync(() => WebVault())
+                    ExecuteAsync = () => App.Current.Dispatcher.DispatchAsync(() => WebVault())
                 });
             }
 
@@ -727,7 +727,7 @@ namespace Bit.App.Pages
                 new SettingsPageListItem
                 {
                     Name = AppResources.HelpAndFeedback,
-                    ExecuteAsync = () => Device.InvokeOnMainThreadAsync(() => Help())
+                    ExecuteAsync = () => App.Current.Dispatcher.DispatchAsync(() => Help())
                 },
 #if !FDROID 
                 new SettingsPageListItem
@@ -740,7 +740,7 @@ namespace Bit.App.Pages
                 new SettingsPageListItem
                 {
                     Name = AppResources.RateTheApp,
-                    ExecuteAsync = () => Device.InvokeOnMainThreadAsync(() => Rate())
+                    ExecuteAsync = () => App.Current.Dispatcher.DispatchAsync(() => Rate())
                 },
                 new SettingsPageListItem
                 {

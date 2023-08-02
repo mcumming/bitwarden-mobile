@@ -140,7 +140,7 @@ namespace Bit.App.Pages
                     items.AddRange(itemGroup);
                 }
 
-                await Device.InvokeOnMainThreadAsync(() =>
+                await App.Current.Dispatcher.DispatchAsync(() =>
                 {
                     if (groupedItems.Any())
                     {
@@ -153,7 +153,7 @@ namespace Bit.App.Pages
                     }
                 });
             }
-            await Device.InvokeOnMainThreadAsync(() =>
+            await App.Current.Dispatcher.DispatchAsync(() =>
             {
                 ShowList = groupedItems.Any();
                 ShowNoData = !ShowList;

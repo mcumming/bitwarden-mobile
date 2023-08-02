@@ -90,7 +90,7 @@ Device.RuntimePlatform == Device.Android ? 74 : 70;
 
             await ViewModel.RefreshAccountViewsAsync();
 
-            await Device.InvokeOnMainThreadAsync(async () =>
+            await Dispatcher.DispatchAsync(async () =>
             {
                 // start listView in default (off-screen) position
                 await _accountListContainer.TranslateTo(0, _accountListContainer.Height * -1, 0);
@@ -125,7 +125,7 @@ Device.RuntimePlatform == Device.Android ? 74 : 70;
                 return;
             }
             // Not all animations are awaited. This is intentional to allow multiple simultaneous animations.
-            await Device.InvokeOnMainThreadAsync(async () =>
+            await Dispatcher.DispatchAsync(async () =>
             {
                 // start overlay fade-out
                 this.FadeTo(0, 200);

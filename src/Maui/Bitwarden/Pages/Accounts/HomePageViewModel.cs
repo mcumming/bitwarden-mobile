@@ -52,9 +52,9 @@ namespace Bit.App.Pages
             };
             RememberEmailCommand = new Command(() => RememberEmail = !RememberEmail);
             ContinueCommand = new AsyncCommand(ContinueToLoginStepAsync, allowsMultipleExecutions: false);
-            CreateAccountCommand = new AsyncCommand(async () => Device.InvokeOnMainThreadAsync(StartRegisterAction),
+            CreateAccountCommand = new AsyncCommand(async () => await App.Current.Dispatcher.DispatchAsync(StartRegisterAction),
                 onException: _logger.Exception, allowsMultipleExecutions: false);
-            CloseCommand = new AsyncCommand(async () => Device.InvokeOnMainThreadAsync(CloseAction),
+            CloseCommand = new AsyncCommand(async () => await App.Current.Dispatcher.DispatchAsync(CloseAction),
                 onException: _logger.Exception, allowsMultipleExecutions: false);
             ShowEnvironmentPickerCommand = new AsyncCommand(ShowEnvironmentPickerAsync,
                 onException: _logger.Exception, allowsMultipleExecutions: false);
@@ -170,7 +170,7 @@ namespace Bit.App.Pages
                     ? new string[] { AppResources.US, AppResources.EU, AppResources.SelfHosted }
                     : new string[] { AppResources.US, AppResources.SelfHosted };
 
-            await Device.InvokeOnMainThreadAsync(async () =>
+            await App.Current.Dispatcher.DispatchAsync(async () =>
             {
                 var result = await Page.DisplayActionSheet(AppResources.DataRegion, AppResources.Cancel, null, options);
 

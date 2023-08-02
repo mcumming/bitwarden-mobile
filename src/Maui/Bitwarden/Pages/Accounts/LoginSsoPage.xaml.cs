@@ -24,12 +24,12 @@ namespace Bit.App.Pages
             InitializeComponent();
             _vm = BindingContext as LoginSsoPageViewModel;
             _vm.Page = this;
-            _vm.StartTwoFactorAction = () => Device.BeginInvokeOnMainThread(async () => await StartTwoFactorAsync());
+            _vm.StartTwoFactorAction = () => Dispatcher.Dispatch(async () => await StartTwoFactorAsync());
             _vm.StartSetPasswordAction = () =>
-                Device.BeginInvokeOnMainThread(async () => await StartSetPasswordAsync());
-            _vm.SsoAuthSuccessAction = () => Device.BeginInvokeOnMainThread(async () => await SsoAuthSuccessAsync());
+                Dispatcher.Dispatch(async () => await StartSetPasswordAsync());
+            _vm.SsoAuthSuccessAction = () => Dispatcher.Dispatch(async () => await SsoAuthSuccessAsync());
             _vm.UpdateTempPasswordAction =
-                () => Device.BeginInvokeOnMainThread(async () => await UpdateTempPasswordAsync());
+                () => Dispatcher.Dispatch(async () => await UpdateTempPasswordAsync());
             _vm.CloseAction = async () =>
             {
                 await Navigation.PopModalAsync();

@@ -29,7 +29,7 @@ namespace Bit.App.Pages
             _broadcasterService = ServiceContainer.Resolve<IBroadcasterService>();
             _vm = BindingContext as LockPageViewModel;
             _vm.Page = this;
-            _vm.UnlockedAction = () => Device.BeginInvokeOnMainThread(async () => await UnlockedAsync());
+            _vm.UnlockedAction = () => Dispatcher.Dispatch(async () => await UnlockedAsync());
 
             // TODO Xamarin.Forms.Device.RuntimePlatform is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
             if (Device.RuntimePlatform == Device.iOS)
@@ -74,7 +74,7 @@ namespace Bit.App.Pages
             {
                 if (message.Command == Constants.ClearSensitiveFields)
                 {
-                    Device.BeginInvokeOnMainThread(_vm.ResetPinPasswordFields);
+                    Dispatcher.Dispatch(_vm.ResetPinPasswordFields);
                 }
             });
             if (_appeared)
@@ -109,7 +109,7 @@ namespace Bit.App.Pages
                     var tasks = Task.Run(async () =>
                     {
                         await Task.Delay(500);
-                        Device.BeginInvokeOnMainThread(async () => await _vm.PromptBiometricAsync());
+                        Dispatcher.Dispatch(async () => await _vm.PromptBiometricAsync());
                     });
                 }
             }
@@ -117,7 +117,7 @@ namespace Bit.App.Pages
 
         private void PerformFocusSecretEntry(int? cursorPosition)
         {
-            Device.BeginInvokeOnMainThread(() =>
+            Dispatcher.Dispatch(() =>
             {
                 SecretEntry.Focus();
                 if (cursorPosition.HasValue)
@@ -152,7 +152,7 @@ namespace Bit.App.Pages
                 var tasks = Task.Run(async () =>
                 {
                     await Task.Delay(50);
-                    Device.BeginInvokeOnMainThread(async () => await _vm.SubmitAsync());
+                    Dispatcher.Dispatch(async () => await _vm.SubmitAsync());
                 });
             }
         }

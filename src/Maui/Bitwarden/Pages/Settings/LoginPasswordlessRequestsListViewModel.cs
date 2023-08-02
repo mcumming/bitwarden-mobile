@@ -106,7 +106,7 @@ namespace Bit.App.Pages
                 Origin = loginRequestData.Origin
             });
 
-            await Device.InvokeOnMainThreadAsync(() => Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(page)));
+            await App.Current.Dispatcher.DispatchAsync(() => Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(page)));
         }
 
         private async Task DeclineAllRequestsAsync()

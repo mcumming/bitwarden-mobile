@@ -64,7 +64,7 @@ namespace Bit.App.Pages
                 onException: ex => HandleException(ex),
                 allowsMultipleExecutions: false);
 
-            CloseCommand = new AsyncCommand(() => Device.InvokeOnMainThreadAsync(CloseAction),
+            CloseCommand = new AsyncCommand(() => App.Current.Dispatcher.DispatchAsync(CloseAction),
                 onException: _logger.Exception,
                 allowsMultipleExecutions: false);
         }
@@ -166,7 +166,7 @@ namespace Bit.App.Pages
 
         private async Task CreatePasswordlessLoginAsync()
         {
-            await Device.InvokeOnMainThreadAsync(() => _deviceActionService.ShowLoadingAsync(AppResources.Loading));
+            await App.Current.Dispatcher.DispatchAsync(() => _deviceActionService.ShowLoadingAsync(AppResources.Loading));
 
             var response = await _authService.PasswordlessCreateLoginRequestAsync(_email);
             if (response != null)

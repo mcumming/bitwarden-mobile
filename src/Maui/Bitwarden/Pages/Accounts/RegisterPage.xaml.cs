@@ -16,7 +16,7 @@ namespace Bit.App.Pages
             InitializeComponent();
             _vm = BindingContext as RegisterPageViewModel;
             _vm.Page = this;
-            _vm.RegistrationSuccess = () => Device.BeginInvokeOnMainThread(async () => await RegistrationSuccessAsync(homePage));
+            _vm.RegistrationSuccess = () => Dispatcher.Dispatch(async () => await RegistrationSuccessAsync(homePage));
             _vm.CloseAction = async () =>
             {
                 await Navigation.PopModalAsync();

@@ -32,7 +32,7 @@ namespace Bit.App.Pages
             {
                 _messagingService.Send("logout");
             };
-            _vm.UpdateTempPasswordSuccessAction = () => Device.BeginInvokeOnMainThread(UpdateTempPasswordSuccess);
+            _vm.UpdateTempPasswordSuccessAction = () => Dispatcher.Dispatch(UpdateTempPasswordSuccess);
 
             // Link fields that will be referenced in codebehind
             MasterPasswordEntry = _masterPassword;

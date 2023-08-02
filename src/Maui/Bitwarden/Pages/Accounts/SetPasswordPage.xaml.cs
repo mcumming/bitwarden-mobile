@@ -19,7 +19,7 @@ namespace Bit.App.Pages
             _vm = BindingContext as SetPasswordPageViewModel;
             _vm.Page = this;
             _vm.SetPasswordSuccessAction =
-                () => Device.BeginInvokeOnMainThread(async () => await SetPasswordSuccessAsync());
+                () => Dispatcher.Dispatch(async () => await SetPasswordSuccessAsync());
             _vm.CloseAction = async () =>
             {
                 await Navigation.PopModalAsync();

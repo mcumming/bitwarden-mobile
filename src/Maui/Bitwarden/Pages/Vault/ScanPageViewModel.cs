@@ -34,7 +34,7 @@ namespace Bit.App.Pages
         {
             try
             {
-                await Device.InvokeOnMainThreadAsync(async () =>
+                await App.Current.Dispatcher.DispatchAsync(async () =>
                 {
                     var hasCameraPermission = await PermissionManager.CheckAndRequestPermissionAsync(new Permissions.Camera());
                     HasCameraPermission = hasCameraPermission == PermissionStatus.Granted;

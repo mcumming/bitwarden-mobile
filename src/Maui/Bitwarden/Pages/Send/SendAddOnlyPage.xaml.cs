@@ -76,7 +76,7 @@ namespace Bit.App.Pages
                 }
 
                 _accountAvatar?.OnAppearing();
-                await Device.InvokeOnMainThreadAsync(async () => _vm.AvatarImageSource = await GetAvatarImageSourceAsync());
+                await Dispatcher.DispatchAsync(async () => _vm.AvatarImageSource = await GetAvatarImageSourceAsync());
 
                 await HandleCreateRequest();
                 if (string.IsNullOrWhiteSpace(_vm.Send?.Name))

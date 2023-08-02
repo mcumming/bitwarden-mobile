@@ -82,7 +82,7 @@ namespace Bit.App
                         var confirmed = true;
                         var confirmText = string.IsNullOrWhiteSpace(details.ConfirmText) ?
                             AppResources.Ok : details.ConfirmText;
-                        Device.BeginInvokeOnMainThread(async () =>
+                        Dispatcher.Dispatch(async () =>
                         {
                             if (!string.IsNullOrWhiteSpace(details.CancelText))
                             {
@@ -128,7 +128,7 @@ namespace Bit.App
                             Options.OtpData = new OtpData((string)message.Data);
                         }
 
-                        Device.InvokeOnMainThreadAsync(async () =>
+                        Dispatcher.Dispatch(async () =>
                         {
                             if (Current.MainPage is TabsPage tabsPage)
                             {
@@ -164,7 +164,7 @@ namespace Bit.App
                     }
                     else if (message.Command == "convertAccountToKeyConnector")
                     {
-                        Device.BeginInvokeOnMainThread(async () =>
+                        Dispatcher.Dispatch(async () =>
                         {
                             await Application.Current.MainPage.Navigation.PushModalAsync(
                                 new NavigationPage(new RemoveMasterPasswordPage()));
@@ -172,7 +172,7 @@ namespace Bit.App
                     }
                     else if (message.Command == Constants.ForceUpdatePassword)
                     {
-                        Device.BeginInvokeOnMainThread(async () =>
+                        Dispatcher.Dispatch(async () =>
                         {
                             await Application.Current.MainPage.Navigation.PushModalAsync(
                                 new NavigationPage(new UpdateTempPasswordPage()));
@@ -247,7 +247,7 @@ namespace Bit.App
             _pushNotificationService.DismissLocalNotification(Constants.PasswordlessNotificationId);
             if (!loginRequestData.IsExpired)
             {
-                await Device.InvokeOnMainThreadAsync(() => Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(page)));
+                await Dispatcher.DispatchAsync(() => Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(page)));
             }
         }
 
@@ -260,7 +260,7 @@ namespace Bit.App
             }
 
             var notificationUserEmail = await _stateService.GetEmailAsync(notification.UserId);
-            Device.BeginInvokeOnMainThread(async () =>
+            Dispatcher.Dispatch(async () =>
             {
                 try
                 {
@@ -372,7 +372,7 @@ namespace Bit.App
 
         public async Task UpdateThemeAsync()
         {
-            await Device.InvokeOnMainThreadAsync(() =>
+            await Dispatcher.DispatchAsync(() =>
             {
                 ThemeManager.SetTheme(Current.Resources);
                 _messagingService.Send("updatedTheme");
@@ -381,7 +381,7 @@ namespace Bit.App
 
         private async Task ClearSensitiveFieldsAsync()
         {
-            await Device.InvokeOnMainThreadAsync(() =>
+            await Dispatcher.DispatchAsync(() =>
             {
                 _messagingService.Send(Constants.ClearSensitiveFields);
             });
@@ -421,7 +421,7 @@ namespace Bit.App
             {
                 Task.Run(() =>
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    Dispatcher.Dispatch(() =>
                     {
                         Options.Uri = null;
                         if (isLocked)

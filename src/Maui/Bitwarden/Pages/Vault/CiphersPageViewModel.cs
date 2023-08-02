@@ -163,7 +163,7 @@ namespace Bit.App.Pages
                 {
                     ciphers = new List<CipherView>();
                 }
-                Device.BeginInvokeOnMainThread(() =>
+                App.Current.Dispatcher.Dispatch(() =>
                 {
                     Ciphers.ResetWithRange(ciphers);
                     ShowNoData = !shouldShowAllWhenEmpty && searchable && Ciphers.Count == 0;

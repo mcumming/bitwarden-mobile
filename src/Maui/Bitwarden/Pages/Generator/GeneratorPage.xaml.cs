@@ -83,7 +83,7 @@ namespace Bit.App.Pages
             {
                 if (message.Command == "updatedTheme")
                 {
-                    Device.BeginInvokeOnMainThread(() => _vm.RedrawPassword());
+                    Dispatcher.Dispatch(() => _vm.RedrawPassword());
                 }
             });
         }
@@ -143,7 +143,7 @@ namespace Bit.App.Pages
         {
             await base.UpdateOnThemeChanged();
 
-            await Device.InvokeOnMainThreadAsync(() =>
+            await Dispatcher.DispatchAsync(() =>
             {
                 if (_vm != null)
                 {

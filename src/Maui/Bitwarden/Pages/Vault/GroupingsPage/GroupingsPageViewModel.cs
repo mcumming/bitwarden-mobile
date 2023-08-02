@@ -316,7 +316,7 @@ namespace Bit.App.Pages
                         items.AddRange(itemGroup);
                     }
 
-                    Device.BeginInvokeOnMainThread(() =>
+                    App.Current.Dispatcher.Dispatch(() =>
                     {
                         if (Device.RuntimePlatform == Device.iOS)
                         {
@@ -345,7 +345,7 @@ namespace Bit.App.Pages
                         items.AddRange(itemGroup);
                     }
 
-                    Device.BeginInvokeOnMainThread(() =>
+                    App.Current.Dispatcher.Dispatch(() =>
                     {
                         if (groupedItems.Any())
                         {
@@ -370,7 +370,7 @@ namespace Bit.App.Pages
                 _doingLoad = false;
                 Loaded = true;
                 Loading = false;
-                Device.BeginInvokeOnMainThread(() =>
+                App.Current.Dispatcher.Dispatch(() =>
                 {
                     ShowNoData = (MainPage && !HasCiphers) || !groupedItems.Any();
                     ShowList = !ShowNoData;

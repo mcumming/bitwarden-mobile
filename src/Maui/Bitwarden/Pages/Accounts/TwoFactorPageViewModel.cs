@@ -179,7 +179,7 @@ Device.RuntimePlatform == Device.iOS ? AppResources.YubiKeyInstructionIos :
                     page.DuoWebView.RegisterAction(sig =>
                     {
                         Token = sig;
-                        Device.BeginInvokeOnMainThread(async () => await SubmitAsync());
+                        App.Current.Dispatcher.Dispatch(async () => await SubmitAsync());
                     });
                     break;
                 case TwoFactorProviderType.Email:

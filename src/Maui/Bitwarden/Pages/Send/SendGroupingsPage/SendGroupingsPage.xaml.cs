@@ -75,12 +75,12 @@ namespace Bit.App.Pages
                 {
                     if (message.Command == "syncStarted")
                     {
-                        Device.BeginInvokeOnMainThread(() => IsBusy = true);
+                        Dispatcher.Dispatch(() => IsBusy = true);
                     }
                     else if (message.Command == "syncCompleted" || message.Command == "sendUpdated")
                     {
                         await Task.Delay(500);
-                        Device.BeginInvokeOnMainThread(() =>
+                        Dispatcher.Dispatch(() =>
                         {
                             IsBusy = false;
                             if (_vm.LoadedOnce)

@@ -37,7 +37,7 @@ namespace Bit.App.Utilities
                 {
                     while (!_cancellationTokenSource.IsCancellationRequested)
                     {
-                        await Device.InvokeOnMainThreadAsync(async () =>
+                        await App.Current.Dispatcher.DispatchAsync(async () =>
                         {
                             if (!_cancellationTokenSource.IsCancellationRequested)
                             {

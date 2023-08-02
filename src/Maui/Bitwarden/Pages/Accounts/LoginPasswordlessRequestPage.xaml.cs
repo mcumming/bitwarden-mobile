@@ -20,9 +20,9 @@ namespace Bit.App.Pages
             _vm = BindingContext as LoginPasswordlessRequestViewModel;
             _vm.Page = this;
             _vm.Email = email;
-            _vm.StartTwoFactorAction = () => Device.BeginInvokeOnMainThread(async () => await StartTwoFactorAsync());
-            _vm.LogInSuccessAction = () => Device.BeginInvokeOnMainThread(async () => await LogInSuccessAsync());
-            _vm.UpdateTempPasswordAction = () => Device.BeginInvokeOnMainThread(async () => await UpdateTempPasswordAsync());
+            _vm.StartTwoFactorAction = () => Dispatcher.Dispatch(async () => await StartTwoFactorAsync());
+            _vm.LogInSuccessAction = () => Dispatcher.Dispatch(async () => await LogInSuccessAsync());
+            _vm.UpdateTempPasswordAction = () => Dispatcher.Dispatch(async () => await UpdateTempPasswordAsync());
             _vm.CloseAction = () => { Navigation.PopModalAsync(); };
 
             _vm.CreatePasswordlessLoginCommand.Execute(null);

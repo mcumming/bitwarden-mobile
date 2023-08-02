@@ -29,11 +29,11 @@ namespace Bit.App.Pages
             _broadcasterService = ServiceContainer.Resolve<IBroadcasterService>();
             _vm = BindingContext as LoginPageViewModel;
             _vm.Page = this;
-            _vm.StartTwoFactorAction = () => Device.BeginInvokeOnMainThread(async () => await StartTwoFactorAsync());
-            _vm.LogInSuccessAction = () => Device.BeginInvokeOnMainThread(async () => await LogInSuccessAsync());
+            _vm.StartTwoFactorAction = () => Dispatcher.Dispatch(async () => await StartTwoFactorAsync());
+            _vm.LogInSuccessAction = () => Dispatcher.Dispatch(async () => await LogInSuccessAsync());
             _vm.LogInWithDeviceAction = () => StartLoginWithDeviceAsync().FireAndForget();
-            _vm.StartSsoLoginAction = () => Device.BeginInvokeOnMainThread(async () => await StartSsoLoginAsync());
-            _vm.UpdateTempPasswordAction = () => Device.BeginInvokeOnMainThread(async () => await UpdateTempPasswordAsync());
+            _vm.StartSsoLoginAction = () => Dispatcher.Dispatch(async () => await StartSsoLoginAsync());
+            _vm.UpdateTempPasswordAction = () => Dispatcher.Dispatch(async () => await UpdateTempPasswordAsync());
             _vm.CloseAction = async () =>
             {
                 await _accountListOverlay.HideAsync();
@@ -79,7 +79,7 @@ namespace Bit.App.Pages
             {
                 if (message.Command == Constants.ClearSensitiveFields)
                 {
-                    Device.BeginInvokeOnMainThread(_vm.ResetPasswordField);
+                    Dispatcher.Dispatch(_vm.ResetPasswordField);
                 }
             });
             _mainContent.Content = _mainLayout;

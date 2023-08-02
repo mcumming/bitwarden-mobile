@@ -145,7 +145,7 @@ namespace Bit.App.Utilities.AccountManagement
                 switch (message.Command)
                 {
                     case AccountsManagerMessageCommands.LOCKED:
-                        await Device.InvokeOnMainThreadAsync(() => LockedAsync(message.Data as Tuple<string, bool>));
+                        await App.Current.Dispatcher.DispatchAsync(() => LockedAsync(message.Data as Tuple<string, bool>));
                         break;
                     case AccountsManagerMessageCommands.LOCK_VAULT:
                         await _vaultTimeoutService.LockAsync(true);
@@ -155,7 +155,7 @@ namespace Bit.App.Utilities.AccountManagement
                         var userId = extras?.Item1;
                         var userInitiated = extras?.Item2 ?? true;
                         var expired = extras?.Item3 ?? false;
-                        await Device.InvokeOnMainThreadAsync(() => LogOutAsync(userId, userInitiated, expired));
+                        await App.Current.Dispatcher.DispatchAsync(() => LogOutAsync(userId, userInitiated, expired));
                         break;
                     case AccountsManagerMessageCommands.LOGGED_OUT:
                         // Clean up old migrated key if they ever log out.
@@ -203,12 +203,12 @@ namespace Bit.App.Utilities.AccountManagement
 
             await _accountsManagerHost.SetPreviousPageInfoAsync();
 
-            await Device.InvokeOnMainThreadAsync(() => _accountsManagerHost.Navigate(NavigationTarget.Lock, new LockNavigationParams(autoPromptBiometric)));
+            await App.Current.Dispatcher.DispatchAsync(() => _accountsManagerHost.Navigate(NavigationTarget.Lock, new LockNavigationParams(autoPromptBiometric)));
         }
 
         private async Task AddAccountAsync()
         {
-            await Device.InvokeOnMainThreadAsync(() =>
+            await App.Current.Dispatcher.DispatchAsync(() =>
             {
                 Options.HideAccountSwitcher = false;
                 _accountsManagerHost.Navigate(NavigationTarget.HomeLogin);
@@ -233,7 +233,7 @@ namespace Bit.App.Utilities.AccountManagement
         private async Task SwitchedAccountAsync()
         {
             await AppHelpers.OnAccountSwitchAsync();
-            await Device.InvokeOnMainThreadAsync(async () =>
+            await App.Current.Dispatcher.DispatchAsync(async () =>
             {
                 if (await _vaultTimeoutService.ShouldTimeoutAsync())
                 {

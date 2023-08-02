@@ -110,7 +110,7 @@ namespace Bit.App.Pages
             await Task.Run(async () =>
             {
                 await Task.Delay(fromModal ? ShowModalAnimationDelay : ShowPageAnimationDelay);
-                Device.BeginInvokeOnMainThread(async () => await DoWorkAsync());
+                Dispatcher.Dispatch(async () => await DoWorkAsync());
             });
         }
 
@@ -119,7 +119,7 @@ namespace Bit.App.Pages
             Task.Run(async () =>
             {
                 await Task.Delay(ShowModalAnimationDelay);
-                Device.BeginInvokeOnMainThread(() => input.Focus());
+                Dispatcher.Dispatch(() => input.Focus());
             });
         }
 

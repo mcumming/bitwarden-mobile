@@ -42,7 +42,7 @@ namespace Bit.App.Pages
         public async Task InitAsync()
         {
             var history = await _passwordGenerationService.GetHistoryAsync();
-            Device.BeginInvokeOnMainThread(() =>
+            App.Current.Dispatcher.Dispatch(() =>
             {
                 History.ResetWithRange(history ?? new List<GeneratedPasswordHistory>());
                 ShowNoData = History.Count == 0;
@@ -66,7 +66,7 @@ namespace Bit.App.Pages
         {
             try
             {
-                await Device.InvokeOnMainThreadAsync(() => History.ResetWithRange(new List<GeneratedPasswordHistory>()));
+                await App.Current.Dispatcher.DispatchAsync(() => History.ResetWithRange(new List<GeneratedPasswordHistory>()));
 
                 await InitAsync();
             }

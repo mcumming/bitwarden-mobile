@@ -27,9 +27,9 @@ namespace Bit.App.Pages
             _vm.Page = this;
             _vm.ShowCancelButton = _appOptions?.IosExtension ?? false;
             _vm.StartLoginAction = async () => await StartLoginAsync();
-            _vm.StartRegisterAction = () => Device.BeginInvokeOnMainThread(async () => await StartRegisterAsync());
-            _vm.StartSsoLoginAction = () => Device.BeginInvokeOnMainThread(async () => await StartSsoLoginAsync());
-            _vm.StartEnvironmentAction = () => Device.BeginInvokeOnMainThread(async () => await StartEnvironmentAsync());
+            _vm.StartRegisterAction = () => Dispatcher.Dispatch(async () => await StartRegisterAsync());
+            _vm.StartSsoLoginAction = () => Dispatcher.Dispatch(async () => await StartSsoLoginAsync());
+            _vm.StartEnvironmentAction = () => Dispatcher.Dispatch(async () => await StartEnvironmentAsync());
             _vm.CloseAction = async () =>
             {
                 await _accountListOverlay.HideAsync();
@@ -67,7 +67,7 @@ namespace Bit.App.Pages
             {
                 if (message.Command == "updatedTheme")
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    Dispatcher.Dispatch(() =>
                     {
                         UpdateLogo();
                     });

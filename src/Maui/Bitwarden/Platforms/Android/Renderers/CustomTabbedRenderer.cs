@@ -58,7 +58,7 @@ namespace Bit.App.Droid.Renderers
                 {
                     tabsPage.OnPageReselected();
                 }
-                Device.BeginInvokeOnMainThread(async () => await _page.CurrentPage.Navigation.PopToRootAsync());
+                App.Current.Dispatcher.Dispatch(async () => await _page.CurrentPage.Navigation.PopToRootAsync());
             }
         }
     }

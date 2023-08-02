@@ -63,7 +63,7 @@ namespace Bit.App.Pages
             TogglePasswordCommand = new Command(TogglePassword);
             LogInCommand = new Command(async () => await LogInAsync());
             MoreCommand = new AsyncCommand(MoreAsync, onException: _logger.Exception, allowsMultipleExecutions: false);
-            LogInWithDeviceCommand = new AsyncCommand(() => Device.InvokeOnMainThreadAsync(LogInWithDeviceAction), onException: _logger.Exception, allowsMultipleExecutions: false);
+            LogInWithDeviceCommand = new AsyncCommand(() => App.Current.Dispatcher.DispatchAsync(LogInWithDeviceAction), onException: _logger.Exception, allowsMultipleExecutions: false);
 
             AccountSwitchingOverlayViewModel = new AccountSwitchingOverlayViewModel(_stateService, _messagingService, _logger)
             {
