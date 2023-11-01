@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 using System.Windows.Input;
 using Bit.App.Abstractions;
 using Bit.App.Resources;
@@ -10,7 +8,6 @@ using Bit.Core.Enums;
 using Bit.Core.Exceptions;
 using Bit.Core.Models.Domain;
 using Bit.Core.Utilities;
-using Bit.App.Utilities;
 
 namespace Bit.App.Pages
 {

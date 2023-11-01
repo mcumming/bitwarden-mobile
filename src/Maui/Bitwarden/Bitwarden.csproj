@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -304,6 +304,7 @@
 	  <None Remove="Resources\Fonts\bwi-font.ttf" />
 	  <None Remove="Resources\Fonts\MaterialIcons_Regular.ttf" />
 	  <None Remove="Resources\Fonts\RobotoMono_Regular.ttf" />
+	  <None Remove="Platforms\iOS\Core\Effects\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Core\" />
@@ -316,6 +317,7 @@
 	  <Folder Include="Core\Services\" />
 	  <Folder Include="Core\Utilities\" />
 	  <Folder Include="Resources\Fonts\" />
+	  <Folder Include="Platforms\iOS\Core\Effects\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Core\Resources\eff_long_word_list.txt" />
@@ -357,5 +359,30 @@
 	  <BundleResource Include="Platforms\Android\Resources\mipmap-xhdpi\ic_launcher.png" />
 	  <BundleResource Include="Platforms\Android\Resources\mipmap-xhdpi\ic_launcher_round.png" />
 	  <BundleResource Include="Platforms\Android\google-services.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CollectionView\ExtendedGroupableItemsViewController.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CollectionView\CollectionException.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CollectionView\ExtendedGroupableItemsViewDelegator.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomTabbedRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\ExtendedStepperRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\SelectableLabelRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomContentPageRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomEditorRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\HybridWebViewRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomNavigationRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomLabelRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomPickerRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomEntryRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomSearchBarRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\ExtendedTimePickerRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomViewCellRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\ExtendedDatePickerRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Effects\ScrollEnabledEffect.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Effects\ScrollViewContentInsetAdjustmentBehaviorEffect.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CollectionView\ExtendedCollectionViewRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Renderers\CustomButtonRenderer.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Utilities\FontElementExtensions.cs" />
+	  <Compile Remove="Platforms\iOS\Core\Effects\NoEmojiKeyboardEffect.cs" />
 	</ItemGroup>
 </Project>
